@@ -56,6 +56,7 @@ const style = StyleSheet.create({
         padding: 20,
         paddingBottom: 5,
         paddingTop: 5,
+        paddingVertical: 5,
     },
     language: {
         padding: 4,
