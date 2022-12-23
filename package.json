@@ -19,6 +19,7 @@
     "expo-status-bar": "~1.4.2",
     "react": "18.1.0",
     "react-native": "^0.70.5",
+    "react-native-calendars": "^1.1292.0",
     "react-router-native": "^6.5.0",
     "use-navigation": "^0.0.3"
   },

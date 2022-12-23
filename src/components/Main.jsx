@@ -6,6 +6,7 @@ import AppBar from './AppBar.jsx'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { useNavigation } from '@react-navigation/native'
+import Calendario from './Calendario.jsx'
 //const Stack = createNativeStackNavigator()
 
 const Main = () => {
@@ -13,7 +14,7 @@ const Main = () => {
     return (
         <View style={{ flex: 1 }}>
             <AppBar />
-            <Salidas />
+            <Calendario />
             <TouchableOpacity
                 onPress={() => navigate.navigate('salidas')}
                 style={{
