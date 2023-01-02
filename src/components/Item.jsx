@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { StyleSheet } from 'react-native'
 import { Image } from 'react-native'
 import theme from '../theme'
@@ -8,7 +8,7 @@ import StyledText from './StyleText'
 //Parsear, reducir la descripción con una función previa
 // IMAGENES ---> se utiliza Image y source, al cual se le pasa una uri dentro de un objeto
 
-const RepositoryItemsHeader = ({ image, description, duracion, precio }) => (
+const RepositoryItemsHeader = ({ title, image, description, duracion, precio }) => (
     <View style={{ flexDirection: 'row', paddingBottom: 2 }}>
         <View style={{ paddingRight: 10 }}>
             <Image style={style.image} source={{ uri: image }} />
@@ -41,11 +41,11 @@ const ItemsStats = (props) => {
 
 const Item = (props) => (
     <View key={props.id} style={style.container}>
-        <StyledText big bold>
+        {/* <StyledText big bold>
             id :{props.id}
-        </StyledText>
+        </StyledText> */}
         <StyledText fontSize={'subheading'} fontWeight={'bold'}>
-            Title: {props.title}
+            {props.title}
         </StyledText>
         <ItemsStats {...props} />
     </View>
@@ -80,3 +80,16 @@ export default Item
 //Al componente StyledText lo creo yo, que renderiza un text distinto según la prop que llegue
 
 //Flex 1 ----> Ocupa todo le espacio y que haga un salto de linea en caso de que sobre
+
+{
+    /* <ListItem bottomDivider>
+<Avatar source={{ uri: image }} />
+<ListItem.Chevron />
+<ListItem.Content>
+    <ListItem.Title>{title}</ListItem.Title>
+    <ListItem.Subtitle>{description}</ListItem.Subtitle>
+    <ListItem.Subtitle>{duracion}</ListItem.Subtitle>
+    <ListItem.Subtitle>{precio}</ListItem.Subtitle>
+</ListItem.Content>
+</ListItem> */
+}

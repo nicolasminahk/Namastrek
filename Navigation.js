@@ -5,6 +5,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { AntDesign } from '@expo/vector-icons'
 import { FontAwesome5 } from '@expo/vector-icons'
+import { Foundation } from '@expo/vector-icons'
+import Beneficios from './src/components/Beneficios'
 
 const Tab = createBottomTabNavigator()
 const HomeStackNavigator = createNativeStackNavigator()
@@ -42,6 +44,14 @@ function MyTabs() {
                 options={{
                     tabBarLabel: 'Salidas',
                     tabBarIcon: ({ color, size }) => <FontAwesome5 name="walking" size={24} color="green" />,
+                }}
+            />
+            <Tab.Screen
+                name="Beneficios"
+                component={Beneficios}
+                options={{
+                    tabBarLabel: 'Beneficios',
+                    tabBarIcon: ({ color, size }) => <Foundation name="ticket" size={24} color="green" />,
                 }}
             />
         </Tab.Navigator>

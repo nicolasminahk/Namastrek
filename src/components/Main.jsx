@@ -13,7 +13,7 @@ const Main = () => {
     const navigate = useNavigation()
     return (
         <View style={{ flex: 1 }}>
-            <AppBar />
+            {/* <AppBar /> */}
             <Calendario />
             <TouchableOpacity
                 onPress={() => navigate.navigate('salidas')}
@@ -26,7 +26,7 @@ const Main = () => {
                     borderRadius: 10,
                 }}
             >
-                <Text style={{ fontSize: 15, textAlign: 'center', color: 'white' }}>Ir al perfil</Text>
+                <Text style={{ fontSize: 15, textAlign: 'center', color: 'white' }}>Lista de Salidas</Text>
             </TouchableOpacity>
         </View>
     )
