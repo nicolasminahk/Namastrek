@@ -8,16 +8,20 @@ import { FontAwesome5 } from '@expo/vector-icons'
 import { Foundation } from '@expo/vector-icons'
 import Beneficios from './src/components/Beneficios'
 import Nosotros from './src/components/Nosotros'
+import Form from './src/components/Form'
+import Login from './src/components/Login'
 
 const Tab = createBottomTabNavigator()
 const HomeStackNavigator = createNativeStackNavigator()
 
 function MyStack() {
     return (
-        <HomeStackNavigator.Navigator initialRouteName="HomeScreen">
+        <HomeStackNavigator.Navigator initialRouteName="Login">
             <HomeStackNavigator.Screen name="HomeScreen" component={Main} />
             <HomeStackNavigator.Screen name="salidas" component={Salidas} />
             <HomeStackNavigator.Screen name="nosotros" component={Nosotros} />
+            <HomeStackNavigator.Screen name="form" component={Form} />
+            <HomeStackNavigator.Screen name="Login" component={Login} />
         </HomeStackNavigator.Navigator>
     )
 }
