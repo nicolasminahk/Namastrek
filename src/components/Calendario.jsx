@@ -6,7 +6,7 @@ const Calendario = () => {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Calendar
-                style={{ height: '100%', width: '100%', borderRadius: 10, elevation: 4, margin: 40 }}
+                style={{ height: '100%', borderRadius: 10, elevation: 4, margin: 40 }}
                 markingType={'custom'}
                 markedDates={{
                     '2022-12-25': {

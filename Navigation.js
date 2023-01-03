@@ -7,6 +7,7 @@ import { AntDesign } from '@expo/vector-icons'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { Foundation } from '@expo/vector-icons'
 import Beneficios from './src/components/Beneficios'
+import Nosotros from './src/components/Nosotros'
 
 const Tab = createBottomTabNavigator()
 const HomeStackNavigator = createNativeStackNavigator()
@@ -16,6 +17,7 @@ function MyStack() {
         <HomeStackNavigator.Navigator initialRouteName="HomeScreen">
             <HomeStackNavigator.Screen name="HomeScreen" component={Main} />
             <HomeStackNavigator.Screen name="salidas" component={Salidas} />
+            <HomeStackNavigator.Screen name="nosotros" component={Nosotros} />
         </HomeStackNavigator.Navigator>
     )
 }
