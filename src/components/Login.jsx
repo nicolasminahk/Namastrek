@@ -5,7 +5,7 @@ import StyledText from './StyleText'
 import { LinearGradient } from 'expo-linear-gradient'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 import { initializeApp } from 'firebase/app'
-import { firebaseConfig } from '/firebase-config.js'
+import { firebaseConfig } from '../../firebase-config'
 
 const Login = () => {
     const [email, setEmail] = useState('')
@@ -16,19 +16,20 @@ const Login = () => {
 
     const handleCreateAccount = () => {
         createUserWithEmailAndPassword(auth, email, password)
-            .then(() => {
+            .then((userCredential) => {
                 Alert.alert('Se creó!')
                 const user = userCredential.user
                 console.log(user)
             })
             .catch((error) => {
                 Alert.alert(error)
+                throw error
             })
     }
 
     const handleSignIn = () => {
         signInWithEmailAndPassword(auth, email, password)
-            .then(() => {
+            .then((userCredential) => {
                 Alert('SignIn!')
                 const user = userCredential.user
             })
