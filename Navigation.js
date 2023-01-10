@@ -16,8 +16,8 @@ const HomeStackNavigator = createNativeStackNavigator()
 
 function MyStack() {
     return (
-        <HomeStackNavigator.Navigator initialRouteName="HomeScreen">
-            <HomeStackNavigator.Screen name="HomeScreen" component={Main} />
+        <HomeStackNavigator.Navigator initialRouteName="Inicio">
+            <HomeStackNavigator.Screen name="Inicio" component={Main} />
             <HomeStackNavigator.Screen name="salidas" component={Salidas} />
             <HomeStackNavigator.Screen name="nosotros" component={Nosotros} />
             <HomeStackNavigator.Screen name="form" component={Form} />
@@ -29,7 +29,7 @@ function MyStack() {
 function MyTabs() {
     return (
         <Tab.Navigator
-            initialRouteName="home"
+            initialRouteName="Inicio"
             screenOptions={{
                 tabBarActiveTintColor: 'purple',
             }}

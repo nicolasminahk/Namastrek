@@ -31,7 +31,7 @@ const Beneficios = () => {
                     <ListItem key={cupon.id}>
                         <ListItem.Chevron />
                         <ListItem.Content>
-                            <ListItem.Title> {cupon.titulo} </ListItem.Title>
+                            <ListItem.Title style={{ color: 'green' }}> {cupon.titulo} </ListItem.Title>
                             <ListItem.Subtitle> {cupon.descripcion}</ListItem.Subtitle>
                             <ListItem.Subtitle> {cupon.valido}</ListItem.Subtitle>
                         </ListItem.Content>

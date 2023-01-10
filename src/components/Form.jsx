@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { SafeAreaView, StyleSheet, TextInput } from 'react-native'
+import { Button, SafeAreaView, StyleSheet, TextInput, View } from 'react-native'
+import RNPickerSelect from 'react-native-picker-select'
 
 const Form = () => {
     const [text, onChangeText] = useState('')
@@ -9,6 +10,15 @@ const Form = () => {
     return (
         <SafeAreaView>
             <TextInput style={styles.input} onChangeText={onChangeText} value={text} placeholder={'Nombre Completo'} />
+            <TextInput style={styles.input} onChangeText={onChangeText} value={text} placeholder={'Domicilio '} />
+            <TextInput
+                style={styles.input}
+                onChangeText={onChangeText}
+                value={text}
+                placeholder={'Telefono de contaco '}
+            />
+            <TextInput style={styles.input} onChangeText={onChangeText} value={text} placeholder={'Profesion '} />
+            <TextInput style={styles.input} onChangeText={onChangeText} value={text} placeholder={'Obra Social '} />
             <TextInput
                 style={styles.input}
                 onChangeText={onChangeNumber}
@@ -16,7 +26,37 @@ const Form = () => {
                 placeholder="Tipo de Sangre"
                 //keyboardType="numeric"
             />
-            <TextInput style={styles.input} onChangeText={onChangeAlerg} value={alerg} placeholder={'Alergias'} />
+            <TextInput
+                style={styles.input}
+                onChangeText={onChangeAlerg}
+                value={alerg}
+                placeholder={'Alergias a Medicamentos'}
+            />
+            <TextInput
+                style={styles.input}
+                onChangeText={onChangeAlerg}
+                value={alerg}
+                placeholder={'Alergias a Alimentos'}
+            />
+            <View style={styles.input}>
+                <RNPickerSelect
+                    onValueChange={(value) => console.log(value)}
+                    placeholder={'Tipo de Sangre'}
+                    items={[
+                        { label: 'A+', value: 'A+' },
+                        { label: 'A-', value: 'A-' },
+                        { label: 'B+', value: 'B+' },
+                        { label: 'B-', value: 'B-' },
+                        { label: 'AB+', value: 'AB+' },
+                        { label: 'AB-', value: 'AB-' },
+                        { label: '0+', value: '0+' },
+                        { label: '0-', value: '0-' },
+                    ]}
+                />
+            </View>
+            <View>
+                <Button title="Guardar" />
+            </View>
         </SafeAreaView>
     )
 }

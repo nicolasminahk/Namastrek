@@ -57,11 +57,14 @@ const style = StyleSheet.create({
         paddingBottom: 5,
         paddingTop: 5,
         paddingVertical: 5,
+        justifyContent: 'space-between',
+        alignContent: 'center',
     },
     language: {
-        padding: 4,
+        // padding: 4,
         color: theme.colors.white,
         backgroundColor: theme.colors.primary,
+        alignSelf: 'flex-start',
         //alignSelf: "flex-start" para que el bloque ocupe solo el tamaño del texto y no todo el ancho
         //par que aparezca el border radius hay que acompañarlo de un overFlow
         borderRadius: 4,
@@ -69,8 +72,8 @@ const style = StyleSheet.create({
         marginVertical: 4,
     },
     image: {
-        width: 48,
-        height: 48,
+        width: 58,
+        height: 58,
         borderRadius: 4,
     },
 })

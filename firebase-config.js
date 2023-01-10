@@ -9,3 +9,13 @@ export const firebaseConfig = {
     appId: '1:662685999414:web:2f5b55c28ca3b0e0605397',
     measurementId: 'G-NV1QWWP7DB',
 }
+// const firebaseConfig = {
+//     apiKey: 'api-key',
+//     authDomain: 'project-id.firebaseapp.com',
+//     databaseURL: 'https://project-id.firebaseio.com',
+//     projectId: 'project-id',
+//     storageBucket: 'project-id.appspot.com',
+//     messagingSenderId: 'sender-id',
+//     appId: 'app-id',
+//     measurementId: 'G-measurement-id',
+//   };

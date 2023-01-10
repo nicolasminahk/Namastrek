@@ -17,7 +17,6 @@ const Main = () => {
         <ScrollView style={{ flex: 1 }}>
             {/* <AppBar /> */}
             <Calendario />
-
             <TouchableOpacity
                 onPress={() => navigate.navigate('salidas')}
                 style={{
@@ -46,6 +45,7 @@ const Main = () => {
                     <Text style={{ fontSize: 15, textAlign: 'center', color: 'white' }}>Formulario</Text>
                 </TouchableOpacity>
             </TouchableOpacity>
+
             <View style={{ margin: 40, alignItems: 'baseline', flex: 1 }}>
                 <Button
                     onPress={() => navigate.navigate('nosotros')}

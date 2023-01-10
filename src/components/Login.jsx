@@ -22,7 +22,10 @@ const Login = () => {
                 console.log(user)
             })
             .catch((error) => {
-                Alert.alert(error)
+                const errorCode = error.code
+                const errorMessage = error.message
+
+                Alert.alert(error.message)
                 throw error
             })
     }
