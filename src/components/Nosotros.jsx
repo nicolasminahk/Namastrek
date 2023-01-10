@@ -19,8 +19,8 @@ const Nosotros = () => {
                 <StyledText style={{ fontWeight: '500' }}>Camina besando la tierra con tus pies </StyledText>
             </View>
             <View>
-                <TouchableOpacity onPress={handleWhatsApp}>
-                    <FontAwesome name="whatsapp" size={24} color="green" />
+                <TouchableOpacity onPress={handleWhatsApp} style={style.icon}>
+                    <FontAwesome name="whatsapp" size={40} color="green" />
                 </TouchableOpacity>
                 {/* <Text
                     style={{ marginTop: 30 }}
@@ -53,6 +53,10 @@ const style = StyleSheet.create({
         color: 'green',
         fontSize: 20,
         marginBottom: 30,
+    },
+    icon: {
+        justifyContent: 'flex-end',
+        padding: 20,
     },
 })
 
