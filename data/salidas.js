@@ -5,7 +5,7 @@ export default [
         description: 'La salida más cercana',
         duracion: '5hs',
         precio: '$400',
-        fecha: '07/01/2023',
+        fecha: '09/01/2023',
         image: 'https://www.infotuc.com.ar/wp-content/uploads/2022/01/cerro-san-javier.jpg',
     },
     {

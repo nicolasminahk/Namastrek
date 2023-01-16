@@ -7,6 +7,8 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } f
 import { initializeApp } from 'firebase/app'
 import { firebaseConfig } from '../../firebase-config'
 
+//FirebaseAuth.getInstance().useEmulator('10.0.2.2', 9099)
+
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')

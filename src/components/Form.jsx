@@ -15,17 +15,10 @@ const Form = () => {
                 style={styles.input}
                 onChangeText={onChangeText}
                 value={text}
-                placeholder={'Telefono de contaco '}
+                placeholder={'Telefono de contacto'}
             />
             <TextInput style={styles.input} onChangeText={onChangeText} value={text} placeholder={'Profesion '} />
             <TextInput style={styles.input} onChangeText={onChangeText} value={text} placeholder={'Obra Social '} />
-            <TextInput
-                style={styles.input}
-                onChangeText={onChangeNumber}
-                value={number}
-                placeholder="Tipo de Sangre"
-                //keyboardType="numeric"
-            />
             <TextInput
                 style={styles.input}
                 onChangeText={onChangeAlerg}
