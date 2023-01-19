@@ -11,7 +11,7 @@ export default [
     {
         id: 2,
         title: 'Raco',
-        description: ' la más mejor',
+        description: 'la más mejor',
         duracion: '20hs',
         precio: '$400',
         fecha: '05/01/2023',
