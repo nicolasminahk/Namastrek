@@ -1,41 +1,53 @@
 import React from 'react'
 import { ScrollView, View } from 'react-native'
 import { StyleSheet } from 'react-native'
-import { Button, Card } from 'react-native-paper'
+import { Card } from 'react-native-paper'
+import { Button } from 'react-native'
 import theme from '../theme'
 import StyledText from './StyleText'
 
-const Item = (props) => (
-    <ScrollView style={style.container}>
-        <View style={{ justifyContent: 'center', padding: 5 }}>
-            <Card key={props.id}>
-                <StyledText style={style.title}>{props.title}</StyledText>
-                <View>
-                    <Card.Content>
-                        <StyledText fontWeight="bold">Description: </StyledText>
-                        <StyledText color="secondary">{props.description}</StyledText>
-                        <View>
-                            <StyledText fontWeight="bold">Duración: </StyledText>
-                            <StyledText>{props.duracion}</StyledText>
-                        </View>
-                        <View>
-                            <StyledText fontWeight="bold" style={style.language}>
-                                Precio:{' '}
-                            </StyledText>
-                            <StyledText>{props.precio}</StyledText>
-                        </View>
-                    </Card.Content>
-                </View>
-                <View>
-                    <Card.Cover source={{ uri: props.image }} style={style.image}></Card.Cover>
-                </View>
-                <Card.Actions>
-                    <Button>IR</Button>
-                </Card.Actions>
-            </Card>
-        </View>
-    </ScrollView>
-)
+const Item = (props) => {
+    return (
+        <ScrollView style={style.container}>
+            <View style={{ justifyContent: 'center', padding: 5 }}>
+                <Card key={props.id}>
+                    <StyledText style={style.title}>{props.title}</StyledText>
+                    <View>
+                        <Card.Content>
+                            <StyledText fontWeight="bold">Description: </StyledText>
+                            <StyledText color="secondary">{props.description}</StyledText>
+                            <View>
+                                <StyledText fontWeight="bold">Duración: </StyledText>
+                                <StyledText>{props.duracion}</StyledText>
+                            </View>
+                            <View>
+                                <StyledText fontWeight="bold" style={style.language}>
+                                    Precio:{' '}
+                                </StyledText>
+                                <StyledText>{props.precio}</StyledText>
+                            </View>
+                        </Card.Content>
+                    </View>
+                    <View>
+                        <Card.Cover
+                            source={{ uri: props.image }}
+                            resizeMode={`cover`}
+                            style={{
+                                flexDirection: 'column',
+                                padding: 10,
+                            }}
+                        />
+                    </View>
+                    <Card.Actions>
+                        <Button title="Ir">
+                            <StyledText>IR</StyledText>
+                        </Button>
+                    </Card.Actions>
+                </Card>
+            </View>
+        </ScrollView>
+    )
+}
 
 const style = StyleSheet.create({
     container: {
@@ -51,7 +63,7 @@ const style = StyleSheet.create({
         paddingLeft: 10,
         padding: 4,
         fontStyle: 'black',
-        fontSize: '30',
+        fontSize: 30,
         fontWeight: 'bold',
         color: 'green',
     },
@@ -63,14 +75,6 @@ const style = StyleSheet.create({
         borderRadius: 4,
         overflow: 'hidden',
         marginVertical: 4,
-    },
-    image: {
-        paddingLeft: 10,
-        paddingTop: 10,
-        width: 70,
-        height: 70,
-        borderRadius: 4,
-        alignContent: 'center',
     },
 })
 

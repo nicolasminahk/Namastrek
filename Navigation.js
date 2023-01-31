@@ -18,7 +18,7 @@ const HomeStackNavigator = createNativeStackNavigator()
 
 function MyStack() {
     return (
-        <HomeStackNavigator.Navigator initialRouteName="Inicio">
+        <HomeStackNavigator.Navigator initialRouteName="Login">
             <HomeStackNavigator.Screen name="Inicio" component={Main} />
             <HomeStackNavigator.Screen name="salidas" component={Salidas} />
             <HomeStackNavigator.Screen name="nosotros" component={Nosotros} />

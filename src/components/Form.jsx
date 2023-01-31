@@ -4,7 +4,6 @@ import RNPickerSelect from 'react-native-picker-select'
 
 const Form = () => {
     const [text, onChangeText] = useState('')
-    const [number, onChangeNumber] = useState(null)
     const [alerg, onChangeAlerg] = useState('')
 
     return (
@@ -33,6 +32,7 @@ const Form = () => {
             />
             <View style={styles.input}>
                 <RNPickerSelect
+                    //useNativeAndroidPickerStyle={false}
                     onValueChange={(value) => console.log(value)}
                     placeholder={'Tipo de Sangre'}
                     items={[
