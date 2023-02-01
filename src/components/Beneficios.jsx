@@ -1,7 +1,8 @@
 import { ListItem } from '@rneui/base'
 import React from 'react'
-import { ScrollView, Text } from 'react-native'
+import { Button, ScrollView, Text } from 'react-native'
 import { gql, useQuery } from '@apollo/client'
+import StyledText from './StyleText'
 
 const ALL_BENEFICIOS = gql`
     query Beneficios {
@@ -23,14 +24,18 @@ const Beneficios = () => {
         <ScrollView style={{ flexDirection: 'column', alignContent: 'center' }}>
             {data.allBeneficios.map((beneficio) => {
                 return (
-                    <ListItem key={beneficio.id}>
-                        <ListItem.Chevron />
-                        <ListItem.Content>
-                            <ListItem.Title style={{ color: 'green' }}> {beneficio.name} </ListItem.Title>
-                            <ListItem.Subtitle> {beneficio.description}</ListItem.Subtitle>
-                            <ListItem.Subtitle> {beneficio.date}</ListItem.Subtitle>
-                        </ListItem.Content>
-                    </ListItem>
+                    <>
+                        <ListItem key={beneficio.id}>
+                            <ListItem.Chevron />
+                            <ListItem.Content>
+                                <ListItem.Title style={{ color: 'green' }}> {beneficio.name} </ListItem.Title>
+                                <ListItem.Subtitle> {beneficio.description}</ListItem.Subtitle>
+                                <ListItem.Title> </ListItem.Title>
+                                <ListItem.Subtitle>Valido hasta: {beneficio.date}</ListItem.Subtitle>
+                            </ListItem.Content>
+                            <Button title="Recibir" />
+                        </ListItem>
+                    </>
                 )
             })}
         </ScrollView>
