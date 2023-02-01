@@ -11,10 +11,10 @@ const Item = (props) => {
         <ScrollView style={style.container}>
             <View style={{ justifyContent: 'center', padding: 5 }}>
                 <Card key={props.id}>
-                    <StyledText style={style.title}>{props.title}</StyledText>
+                    <StyledText style={style.title}>{props.name}</StyledText>
                     <View>
                         <Card.Content>
-                            <StyledText fontWeight="bold">Description: </StyledText>
+                            <StyledText fontWeight="bold">Descripción: </StyledText>
                             <StyledText color="secondary">{props.description}</StyledText>
                             <View>
                                 <StyledText fontWeight="bold">Duración: </StyledText>
@@ -22,9 +22,9 @@ const Item = (props) => {
                             </View>
                             <View>
                                 <StyledText fontWeight="bold" style={style.language}>
-                                    Precio:{' '}
+                                    Precio:{props.price}
                                 </StyledText>
-                                <StyledText>{props.precio}</StyledText>
+                                {/* <StyledText>{props.price}</StyledText> */}
                             </View>
                         </Card.Content>
                     </View>

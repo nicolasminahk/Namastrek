@@ -1,14 +1,30 @@
 import React from 'react'
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, StatusBar, SafeAreaView } from 'react-native'
-import salidas from '../../data/salidas'
-import { useState } from 'react'
-import { Image } from 'react-native'
+import { Text, FlatList } from 'react-native'
+// import salidas from '../../data/salidas'
+import { gql, useQuery } from '@apollo/client'
 import Item from './Item'
 
+const ALL_SALIDAS = gql`
+    query AllSalidas {
+        allSalidas {
+            date
+            description
+            id
+            name
+            price
+        }
+    }
+`
+
 const Salidas = () => {
+    const { loading, error, data } = useQuery(ALL_SALIDAS)
+    // console.log(data)
+
+    if (loading) return <Text>Loading</Text>
+    if (error) return <Text>{error}</Text>
     return (
         <FlatList
-            data={salidas}
+            data={data.allSalidas}
             ItemSeparatorComponent={() => <Text> </Text>}
             renderItem={({ item: salida }) => (
                 <Item
