@@ -2,7 +2,6 @@ import { ListItem } from '@rneui/base'
 import React from 'react'
 import { Button, ScrollView, Text } from 'react-native'
 import { gql, useQuery } from '@apollo/client'
-import StyledText from './StyleText'
 
 const ALL_BENEFICIOS = gql`
     query Beneficios {
