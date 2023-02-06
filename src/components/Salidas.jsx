@@ -17,7 +17,7 @@ const ALL_SALIDAS = gql`
 
 const Salidas = () => {
     const { loading, error, data } = useQuery(ALL_SALIDAS)
-    // console.log(data)
+    console.log(data)
 
     if (loading) return <Text>Loading</Text>
     if (error) return <Text>{error}</Text>
