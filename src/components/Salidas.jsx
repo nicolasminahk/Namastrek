@@ -36,5 +36,7 @@ const Salidas = () => {
 }
 
 // If user es Admin, renderizar el modal para cargar salidas
+// Generar un modal para agregar salidas con los campos requeridos:
+// Name, description, price, date, image, duration.
 
 export default Salidas

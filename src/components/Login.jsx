@@ -1,46 +1,84 @@
 import { StatusBar } from 'expo-status-bar'
-import React, { useState } from 'react'
-import { View, StyleSheet, Text, TextInput, TouchableOpacity, Alert } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native'
 import StyledText from './StyleText'
 import { LinearGradient } from 'expo-linear-gradient'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
-import { initializeApp } from 'firebase/app'
-import { firebaseConfig } from '../../firebase-config'
+import { user_login } from '../api/user_api'
+import { useNavigation } from '@react-navigation/native'
 
-//FirebaseAuth.getInstance().useEmulator('10.0.2.2', 9099)
+const Login = ({ navigation }) => {
+    useEffect(() => {
+        navigation.getParent().setOptions({ tabBarStyle: { display: 'none' } })
+    }, [])
 
-const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [seePassword, setSeePassword] = useState(true)
+    const [checkValidEmail, setCheckValidEmail] = useState(false)
 
-    const app = initializeApp(firebaseConfig)
-    const auth = getAuth(app)
+    const navigate = useNavigation()
 
-    const handleCreateAccount = () => {
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                Alert.alert('Se creó!')
-                const user = userCredential.user
-                console.log(user)
-            })
-            .catch((error) => {
-                const errorCode = error.code
-                const errorMessage = error.message
+    const handleCheckEmail = (text) => {
+        let re = /\S+@\S+\.\S+/
+        let regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
 
-                Alert.alert(error.message)
-                throw error
-            })
+        setEmail(text)
+        if (re.test(text) || regex.test(text)) {
+            setCheckValidEmail(false)
+        } else {
+            setCheckValidEmail(true)
+        }
     }
 
-    const handleSignIn = () => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                Alert('SignIn!')
-                const user = userCredential.user
+    const checkPasswordValidity = (value) => {
+        const isNonWhiteSpace = /^\S*$/
+        if (!isNonWhiteSpace.test(value)) {
+            return 'Password must not contain Whitespaces.'
+        }
+
+        const isContainsUppercase = /^(?=.*[A-Z]).*$/
+        if (!isContainsUppercase.test(value)) {
+            return 'Password must have at least one Uppercase Character.'
+        }
+
+        const isContainsLowercase = /^(?=.*[a-z]).*$/
+        if (!isContainsLowercase.test(value)) {
+            return 'Password must have at least one Lowercase Character.'
+        }
+
+        const isContainsNumber = /^(?=.*[0-9]).*$/
+        if (!isContainsNumber.test(value)) {
+            return 'Password must contain at least one Digit.'
+        }
+
+        const isValidLength = /^.{8,16}$/
+        if (!isValidLength.test(value)) {
+            return 'Password must be 8-16 Characters Long.'
+        }
+
+        return null
+    }
+
+    const handleLogin = () => {
+        const checkPassowrd = checkPasswordValidity(password)
+        if (!checkPassowrd) {
+            user_login({
+                email: email.toLocaleLowerCase(),
+                password: password,
             })
-            .catch((error) => {
-                Alert(error)
-            })
+                .then((result) => {
+                    if (result.status == 200) {
+                        AsyncStorage.setItem('AccessToken', result.data.token)
+                        navigation.replace('Inicio')
+                    }
+                    console.log(result)
+                })
+                .catch((err) => {
+                    console.error(err)
+                })
+        } else {
+            alert(checkPassowrd)
+        }
     }
 
     return (
@@ -55,7 +93,7 @@ const Login = () => {
                 secureTextEntry={true}
             />
             <StatusBar style="auto" />
-            <TouchableOpacity onPress={handleSignIn}>
+            <TouchableOpacity onPress={handleLogin}>
                 <LinearGradient
                     // Button Linear Gradient
                     colors={['#16d638', '#1ef0f2']}
@@ -64,7 +102,7 @@ const Login = () => {
                     <Text style={{ color: 'white', fontWeight: 'bold', marginRight: 10 }}>LOG IN</Text>
                 </LinearGradient>
             </TouchableOpacity>
-            <TouchableOpacity onPress={handleCreateAccount}>
+            <TouchableOpacity onPress={() => navigate.navigate('Register')}>
                 <LinearGradient
                     // Button Linear Gradient
                     colors={['#16d638', '#1ef0f2']}
@@ -112,6 +150,14 @@ const style = StyleSheet.create({
         fontSize: 20,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    icon: {
+        width: 30,
+        height: 24,
+    },
+    textFailed: {
+        alignSelf: 'flex-end',
+        color: 'red',
     },
 })
 

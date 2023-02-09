@@ -12,6 +12,7 @@ import Nosotros from './src/components/Nosotros'
 import Form from './src/components/Form'
 import Login from './src/components/Login'
 import Tips from './src/components/Tips'
+import Register from './src/components/Register'
 
 const Tab = createBottomTabNavigator()
 const HomeStackNavigator = createNativeStackNavigator()
@@ -24,6 +25,7 @@ function MyStack() {
             <HomeStackNavigator.Screen name="nosotros" component={Nosotros} />
             <HomeStackNavigator.Screen name="form" component={Form} />
             <HomeStackNavigator.Screen name="Login" component={Login} />
+            <HomeStackNavigator.Screen name="Register" component={Register} />
         </HomeStackNavigator.Navigator>
     )
 }

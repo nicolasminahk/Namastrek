@@ -2,6 +2,7 @@ import React from 'react'
 import { ScrollView, View } from 'react-native'
 import { Card, Text } from 'react-native-paper'
 import { gql, useQuery } from '@apollo/client'
+import Modal from './Modal'
 
 const ALL_TIPS = gql`
     query Tips {
@@ -40,3 +41,9 @@ const Tips = () => {
 }
 
 export default Tips
+
+//If el user es Admin, que figure el modal para cargar nuevos tipos con los campos requeridos:
+//Name y description
+// {
+//     user.admin && {}
+// }

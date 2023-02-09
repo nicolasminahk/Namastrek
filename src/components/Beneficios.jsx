@@ -42,3 +42,6 @@ const Beneficios = () => {
 }
 
 export default Beneficios
+
+//If user is admin, view modal from new beneficio, con los campos required:
+//name, description, date
