@@ -5,6 +5,18 @@ import StyledText from './StyleText'
 import { LinearGradient } from 'expo-linear-gradient'
 import { user_login } from '../api/user_api'
 import { useNavigation } from '@react-navigation/native'
+import { gql, useQuery, useMutation } from '@apollo/client'
+
+const LOGIN_USER = gql`
+    mutation Mutation($loginInput: LoginInput) {
+        loginUser(loginInput: $loginInput) {
+            email
+            password
+            token
+            username
+        }
+    }
+`
 
 const Login = ({ navigation }) => {
     useEffect(() => {
@@ -15,6 +27,8 @@ const Login = ({ navigation }) => {
     const [password, setPassword] = useState('')
     const [seePassword, setSeePassword] = useState(true)
     const [checkValidEmail, setCheckValidEmail] = useState(false)
+    // const [login, setLogin] = useState(false)
+    const { loading, error, data } = useMutation(LOGIN_USER)
 
     const navigate = useNavigation()
 
@@ -31,38 +45,49 @@ const Login = ({ navigation }) => {
     }
 
     const checkPasswordValidity = (value) => {
-        const isNonWhiteSpace = /^\S*$/
-        if (!isNonWhiteSpace.test(value)) {
-            return 'Password must not contain Whitespaces.'
-        }
+        // const isNonWhiteSpace = /^\S*$/
+        // if (!isNonWhiteSpace.test(value)) {
+        //     return 'Password must not contain Whitespaces.'
+        // }
 
-        const isContainsUppercase = /^(?=.*[A-Z]).*$/
-        if (!isContainsUppercase.test(value)) {
-            return 'Password must have at least one Uppercase Character.'
-        }
+        // const isContainsUppercase = /^(?=.*[A-Z]).*$/
+        // if (!isContainsUppercase.test(value)) {
+        //     return 'Password must have at least one Uppercase Character.'
+        // }
 
-        const isContainsLowercase = /^(?=.*[a-z]).*$/
-        if (!isContainsLowercase.test(value)) {
-            return 'Password must have at least one Lowercase Character.'
-        }
+        // const isContainsLowercase = /^(?=.*[a-z]).*$/
+        // if (!isContainsLowercase.test(value)) {
+        //     return 'Password must have at least one Lowercase Character.'
+        // }
 
-        const isContainsNumber = /^(?=.*[0-9]).*$/
-        if (!isContainsNumber.test(value)) {
-            return 'Password must contain at least one Digit.'
-        }
+        // const isContainsNumber = /^(?=.*[0-9]).*$/
+        // if (!isContainsNumber.test(value)) {
+        //     return 'Password must contain at least one Digit.'
+        // }
 
-        const isValidLength = /^.{8,16}$/
-        if (!isValidLength.test(value)) {
-            return 'Password must be 8-16 Characters Long.'
-        }
+        // const isValidLength = /^.{8,16}$/
+        // if (!isValidLength.test(value)) {
+        //     return 'Password must be 8-16 Characters Long.'
+        // }
 
         return null
     }
+    // const [loginUser] = useMutation(LOGIN_USER, {
+    //     async onCompleted({ signIn }) {
+    //         const { token } = signIn
+    //         try {
+    //             await AsyncStorage.setItem('token', token)
+    //             navigation.replace('Home')
+    //         } catch (err) {
+    //             console.log(err.message)
+    //         }
+    //     },
+    // })
 
     const handleLogin = () => {
         const checkPassowrd = checkPasswordValidity(password)
         if (!checkPassowrd) {
-            user_login({
+            useMutation(LOGIN_USER, {
                 email: email.toLocaleLowerCase(),
                 password: password,
             })
@@ -93,7 +118,7 @@ const Login = ({ navigation }) => {
                 secureTextEntry={true}
             />
             <StatusBar style="auto" />
-            <TouchableOpacity onPress={handleLogin}>
+            <TouchableOpacity onPress={handleLogin()}>
                 <LinearGradient
                     // Button Linear Gradient
                     colors={['#16d638', '#1ef0f2']}
