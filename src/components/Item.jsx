@@ -28,7 +28,7 @@ const Item = (props) => {
                             </View>
                         </Card.Content>
                     </View>
-                    <View>
+                    {/* <View>
                         <Card.Cover
                             source={{ uri: props.image }}
                             resizeMode={`cover`}
@@ -37,7 +37,7 @@ const Item = (props) => {
                                 padding: 10,
                             }}
                         />
-                    </View>
+                    </View> */}
                     <Card.Actions>
                         <Button title="Ir">
                             <StyledText>IR</StyledText>

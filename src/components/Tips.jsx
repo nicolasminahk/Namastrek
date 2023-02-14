@@ -1,8 +1,7 @@
-import React from 'react'
-import { ScrollView, View } from 'react-native'
+import React, { useState } from 'react'
+import { ScrollView, View, TextInput, TouchableOpacity } from 'react-native'
 import { Card, Text } from 'react-native-paper'
-import { gql, useQuery } from '@apollo/client'
-import Modal from './Modal'
+import { gql, useQuery, useMutation } from '@apollo/client'
 
 const ALL_TIPS = gql`
     query Tips {
@@ -13,12 +12,33 @@ const ALL_TIPS = gql`
         }
     }
 `
+const ADD_TIP = gql`
+    mutation Mutation($name: String!, $description: String!) {
+        addTips(name: $name, description: $description) {
+            description
+            id
+            name
+        }
+    }
+`
 
 const Tips = () => {
     const { loading, error, data } = useQuery(ALL_TIPS)
     // console.log(data)
     if (loading) return <Text>Loading</Text>
     if (error) return <Text>{error}</Text>
+
+    const [formState, setFormState] = useState({
+        name: '',
+        description: '',
+    })
+
+    const [createTip] = useMutation(ADD_TIP, {
+        variables: {
+            name: formState.name,
+            description: formState.description,
+        },
+    })
     return (
         <ScrollView>
             {data.allTips.map((tip) => {
@@ -36,6 +56,42 @@ const Tips = () => {
                     </View>
                 )
             })}
+            <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'column', margin: 10 }}>
+                <Text style={{ fontSize: '20rem' }}>Nuevo Tip</Text>
+                <TextInput
+                    value={formState.name}
+                    style={{ backgroundColor: 'f1f1f1', borderRadius: 10, margin: 5 }}
+                    placeholder="Nombre"
+                    onChangeText={(e) => {
+                        setFormState({
+                            ...formState,
+                            name: e,
+                        })
+                        console.log('target', e)
+                    }}
+                ></TextInput>
+                <TextInput
+                    value={formState.description}
+                    onChangeText={(e) => {
+                        setFormState({
+                            ...formState,
+                            description: e,
+                        })
+                        console.log('des', e)
+                    }}
+                    style={{ backgroundColor: 'f1f1f1', borderRadius: 10, margin: 5 }}
+                    placeholder="Descripción"
+                ></TextInput>
+                <TouchableOpacity
+                    style={{ marginTop: 10 }}
+                    onPress={(e) => {
+                        e.preventDefault()
+                        createTip()
+                    }}
+                >
+                    <Text>Subir</Text>
+                </TouchableOpacity>
+            </View>
         </ScrollView>
     )
 }

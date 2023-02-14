@@ -72,39 +72,39 @@ const Login = ({ navigation }) => {
 
         return null
     }
-    // const [loginUser] = useMutation(LOGIN_USER, {
-    //     async onCompleted({ signIn }) {
-    //         const { token } = signIn
-    //         try {
-    //             await AsyncStorage.setItem('token', token)
-    //             navigation.replace('Home')
-    //         } catch (err) {
-    //             console.log(err.message)
-    //         }
-    //     },
-    // })
+    const [loginUser] = useMutation(LOGIN_USER, {
+        async onCompleted({ signIn }) {
+            const { token } = signIn
+            try {
+                await AsyncStorage.setItem('token', token)
+                navigation.replace('Inicio')
+            } catch (err) {
+                console.log(err.message)
+            }
+        },
+    })
 
-    const handleLogin = () => {
-        const checkPassowrd = checkPasswordValidity(password)
-        if (!checkPassowrd) {
-            useMutation(LOGIN_USER, {
-                email: email.toLocaleLowerCase(),
-                password: password,
-            })
-                .then((result) => {
-                    if (result.status == 200) {
-                        AsyncStorage.setItem('AccessToken', result.data.token)
-                        navigation.replace('Inicio')
-                    }
-                    console.log(result)
-                })
-                .catch((err) => {
-                    console.error(err)
-                })
-        } else {
-            alert(checkPassowrd)
-        }
-    }
+    // const handleLogin = () => {
+    //     const checkPassowrd = checkPasswordValidity(password)
+    //     if (!checkPassowrd) {
+    //         useMutation(LOGIN_USER, {
+    //             email: email.toLocaleLowerCase(),
+    //             password: password,
+    //         })
+    //             .then((result) => {
+    //                 if (result.status == 200) {
+    //                     AsyncStorage.setItem('AccessToken', result.data.token)
+    //                     navigation.replace('Inicio')
+    //                 }
+    //                 console.log(result)
+    //             })
+    //             .catch((err) => {
+    //                 console.error(err)
+    //             })
+    //     } else {
+    //         alert(checkPassowrd)
+    //     }
+    // }
 
     return (
         <View style={style.container}>
@@ -118,7 +118,7 @@ const Login = ({ navigation }) => {
                 secureTextEntry={true}
             />
             <StatusBar style="auto" />
-            <TouchableOpacity onPress={handleLogin()}>
+            <TouchableOpacity onPress={loginUser()}>
                 <LinearGradient
                     // Button Linear Gradient
                     colors={['#16d638', '#1ef0f2']}

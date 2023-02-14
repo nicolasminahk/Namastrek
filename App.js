@@ -7,6 +7,8 @@ const client = new ApolloClient({
     cache: new InMemoryCache(),
 })
 
+//Revisar para enviar el Token, setear en la conexión con Apollo
+
 export default function App() {
     return (
         <ApolloProvider client={client}>
