@@ -4,6 +4,18 @@ import { View, Text, TextInput, StyleSheet, Button } from 'react-native'
 import StyledText from './StyleText'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useForm, Controller } from 'react-hook-form'
+import { gql, useMutation } from '@apollo/client'
+
+const ADD_USER = gql`
+    mutation Mutation($registerInput: RegisterInput) {
+        registerUser(registerInput: $registerInput) {
+            email
+            password
+            username
+            token
+        }
+    }
+`
 
 const Register = () => {
     const {
@@ -12,12 +24,25 @@ const Register = () => {
         formState: { errors },
     } = useForm({
         defaultValues: {
-            name: '',
+            username: '',
             email: '',
             password: '',
         },
     })
     const onSubmit = (data) => console.log(data)
+
+    const [formState, setFormState] = useState({
+        name: '',
+        email: '',
+        password: '',
+    })
+    const [createUser] = useMutation(ADD_USER, {
+        variables: {
+            username: formState.username,
+            email: formState.email,
+            password: formState.password,
+        },
+    })
 
     return (
         <View style={style.container}>
@@ -28,12 +53,18 @@ const Register = () => {
                 rules={{
                     required: true,
                 }}
-                render={({ field: { onChange, onBlur, value } }) => (
+                render={({ field: { onBlur } }) => (
                     <TextInput
                         style={style.textInput}
                         onBlur={onBlur}
-                        onChangeText={onChange}
-                        value={value}
+                        onChangeText={(e) => {
+                            setFormState({
+                                ...formState,
+                                username: e,
+                            })
+                            console.log('email', e)
+                        }}
+                        value={username}
                         placeholder="name"
                     />
                 )}
@@ -45,12 +76,18 @@ const Register = () => {
                 rules={{
                     maxLength: 100,
                 }}
-                render={({ field: { onChange, onBlur, value } }) => (
+                render={({ field: { onBlur } }) => (
                     <TextInput
                         style={style.textInput}
                         onBlur={onBlur}
-                        onChangeText={onChange}
-                        value={value}
+                        onChangeText={(e) => {
+                            setFormState({
+                                ...formState,
+                                email: e,
+                            })
+                            console.log('email', e)
+                        }}
+                        value={email}
                         placeholder="email"
                     />
                 )}
@@ -62,12 +99,18 @@ const Register = () => {
                 rules={{
                     maxLength: 100,
                 }}
-                render={({ field: { onChange, onBlur, value } }) => (
+                render={({ field: { onBlur } }) => (
                     <TextInput
                         style={style.textInput}
                         onBlur={onBlur}
-                        onChangeText={onChange}
-                        value={value}
+                        onChangeText={(e) => {
+                            setFormState({
+                                ...formState,
+                                password: e,
+                            })
+                            console.log('pass', e)
+                        }}
+                        value={password}
                         placeholder="password"
                         secureTextEntry={true}
                     />
@@ -77,7 +120,12 @@ const Register = () => {
             {errors.password && <Text>This is required.</Text>}
 
             <View style={{ marginTop: 20 }}>
-                <TouchableOpacity onPress={handleSubmit(onSubmit)}>
+                <TouchableOpacity
+                    onPress={(e) => {
+                        e.preventDefault()
+                        createUser()
+                    }}
+                >
                     <LinearGradient colors={['#16d638', '#1ef0f2']} style={style.button}>
                         <Text style={{ color: 'white', fontWeight: 'bold', marginRight: 10 }}>Guardar</Text>
                     </LinearGradient>

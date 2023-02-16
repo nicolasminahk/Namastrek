@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native'
 import StyledText from './StyleText'
 import { LinearGradient } from 'expo-linear-gradient'
-import { user_login } from '../api/user_api'
 import { useNavigation } from '@react-navigation/native'
 import { gql, useQuery, useMutation } from '@apollo/client'
 
@@ -23,26 +22,25 @@ const Login = ({ navigation }) => {
         navigation.getParent().setOptions({ tabBarStyle: { display: 'none' } })
     }, [])
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [seePassword, setSeePassword] = useState(true)
-    const [checkValidEmail, setCheckValidEmail] = useState(false)
-    // const [login, setLogin] = useState(false)
-    const { loading, error, data } = useMutation(LOGIN_USER)
+    // const [seePassword, setSeePassword] = useState(true)
+    // const [checkValidEmail, setCheckValidEmail] = useState(false)
 
     const navigate = useNavigation()
+    const [formState, setFormState] = useState({
+        email: '',
+        password: '',
+    })
+    // const handleCheckEmail = (text) => {
+    //     let re = /\S+@\S+\.\S+/
+    //     let regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
 
-    const handleCheckEmail = (text) => {
-        let re = /\S+@\S+\.\S+/
-        let regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
-
-        setEmail(text)
-        if (re.test(text) || regex.test(text)) {
-            setCheckValidEmail(false)
-        } else {
-            setCheckValidEmail(true)
-        }
-    }
+    //     setEmail(text)
+    //     if (re.test(text) || regex.test(text)) {
+    //         setCheckValidEmail(false)
+    //     } else {
+    //         setCheckValidEmail(true)
+    //     }
+    // }
 
     const checkPasswordValidity = (value) => {
         // const isNonWhiteSpace = /^\S*$/
@@ -72,67 +70,84 @@ const Login = ({ navigation }) => {
 
         return null
     }
-    const [loginUser] = useMutation(LOGIN_USER, {
-        async onCompleted({ signIn }) {
-            const { token } = signIn
-            try {
-                await AsyncStorage.setItem('token', token)
-                navigation.replace('Inicio')
-            } catch (err) {
-                console.log(err.message)
-            }
-        },
-    })
+    // const [loginUser] = useMutation(LOGIN_USER, {
+    //     async onCompleted({ signIn }) {
+    //         const { token } = signIn
+    //         try {
+    //             await AsyncStorage.setItem('token', token)
+    //             navigation.replace('Inicio')
+    //         } catch (err) {
+    //             console.log(err.message)
+    //         }
+    //     },
+    // })
 
-    // const handleLogin = () => {
-    //     const checkPassowrd = checkPasswordValidity(password)
-    //     if (!checkPassowrd) {
-    //         useMutation(LOGIN_USER, {
-    //             email: email.toLocaleLowerCase(),
-    //             password: password,
-    //         })
-    //             .then((result) => {
-    //                 if (result.status == 200) {
-    //                     AsyncStorage.setItem('AccessToken', result.data.token)
-    //                     navigation.replace('Inicio')
-    //                 }
-    //                 console.log(result)
-    //             })
-    //             .catch((err) => {
-    //                 console.error(err)
-    //             })
-    //     } else {
-    //         alert(checkPassowrd)
-    //     }
-    // }
+    const handleLogin = () => {
+        const checkPassowrd = checkPasswordValidity(password)
+        if (!checkPassowrd) {
+            useMutation(LOGIN_USER, {
+                variables: {
+                    email: email.toLocaleLowerCase(),
+                    password: password,
+                },
+            })
+                .then((result) => {
+                    if (result.status == 200) {
+                        AsyncStorage.setItem('AccessToken', result.data.token)
+                        navigation.replace('Inicio')
+                    }
+                    console.log(result)
+                })
+                .catch((err) => {
+                    console.error(err)
+                })
+        } else {
+            alert(checkPassowrd)
+        }
+    }
 
     return (
         <View style={style.container}>
             <StyledText style={style.titulo}>Hola!</StyledText>
             <Text style={style.subTitle}>Inicia sesión</Text>
-            <TextInput onChange={(text) => setEmail(text)} style={style.textInput} placeholder="email" />
             <TextInput
-                onChange={(text) => setPassword(text)}
+                style={style.textInput}
+                placeholder="email"
+                value={formState.email}
+                onChangeText={(e) => {
+                    setFormState({
+                        ...formState,
+                        email: e,
+                    })
+                    console.log('target', e)
+                }}
+            />
+            <TextInput
+                value={formState.password}
                 style={style.textInput}
                 placeholder="password"
                 secureTextEntry={true}
+                onChangeText={(e) => {
+                    setFormState({
+                        ...formState,
+                        password: e,
+                    })
+                    console.log('target', e)
+                }}
             />
             <StatusBar style="auto" />
-            <TouchableOpacity onPress={loginUser()}>
-                <LinearGradient
-                    // Button Linear Gradient
-                    colors={['#16d638', '#1ef0f2']}
-                    style={style.button}
-                >
+            <TouchableOpacity
+                onPress={(e) => {
+                    e.preventDefault()
+                    handleLogin()
+                }}
+            >
+                <LinearGradient colors={['#16d638', '#1ef0f2']} style={style.button}>
                     <Text style={{ color: 'white', fontWeight: 'bold', marginRight: 10 }}>LOG IN</Text>
                 </LinearGradient>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigate.navigate('Register')}>
-                <LinearGradient
-                    // Button Linear Gradient
-                    colors={['#16d638', '#1ef0f2']}
-                    style={style.button}
-                >
+                <LinearGradient colors={['#16d638', '#1ef0f2']} style={style.button}>
                     <Text style={{ color: 'white', fontWeight: 'bold', marginRight: 10 }}>CREAR CUENTA</Text>
                 </LinearGradient>
             </TouchableOpacity>

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Text, FlatList, View, TextInput, TouchableOpacity } from 'react-native'
 import { gql, useQuery, useMutation } from '@apollo/client'
 import Item from './Item'
+import DatePicker from 'react-native-datepicker'
 
 const ALL_SALIDAS = gql`
     query AllSalidas {
@@ -90,8 +91,8 @@ const Salidas = () => {
                     style={{ backgroundColor: 'f1f1f1', borderRadius: 10, margin: 5 }}
                     placeholder="Descripción"
                 ></TextInput>
-                {/* Aca debe estar el input que cargue la fecha */}
-                {/* Como se resuelve el tema de la imagen, utilizar picker? para android */}
+
+                <DatePicker />
                 <TouchableOpacity
                     style={{ marginTop: 10 }}
                     onPress={(e) => {
