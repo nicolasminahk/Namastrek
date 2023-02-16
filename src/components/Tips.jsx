@@ -23,7 +23,7 @@ const ADD_TIP = gql`
 `
 
 const Tips = () => {
-    const { loading, error, data } = useQuery(ALL_TIPS)
+    const { loading, error, data, refetch } = useQuery(ALL_TIPS, { pollInterval: 500 })
     // console.log(data)
     // if (loading) return <Text>Loading</Text>
     // if (error) return <Text>{error}</Text>
@@ -87,6 +87,11 @@ const Tips = () => {
                     onPress={(e) => {
                         e.preventDefault()
                         createTip()
+                        refetch(ALL_TIPS)
+                        setFormState({
+                            name: '',
+                            description: '',
+                        })
                     }}
                 >
                     <Text>Subir</Text>
