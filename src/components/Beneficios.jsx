@@ -26,8 +26,11 @@ const ADD_BENEFICIO = gql`
 
 const Beneficios = () => {
     const { loading, error, data, refetch } = useQuery(ALL_BENEFICIOS)
-    if (loading) return <Text>Loading</Text>
-    if (error) return <Text>{error}</Text>
+    console.log(data)
+    //Poll interval realiza nuevamente la consulta cada cierto tiempo, esto puede empeorar el rendimiento?
+    // if (loading) return <Text>Loading</Text>
+    // if (error) return <Text>{error}</Text>
+    // , { pollInterval: 500 }
 
     const [formState, setFormState] = useState({
         name: '',
@@ -92,7 +95,11 @@ const Beneficios = () => {
                         e.preventDefault()
                         createBeneficio()
                         refetch(ALL_BENEFICIOS)
-                        // setFormState("")
+                        setFormState({
+                            name: '',
+                            description: '',
+                            date: '',
+                        })
                     }}
                 >
                     <Text>Subir</Text>

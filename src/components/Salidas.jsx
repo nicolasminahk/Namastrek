@@ -32,8 +32,8 @@ const ADD_SALIDA = gql`
 const Salidas = () => {
     const { loading, error, data } = useQuery(ALL_SALIDAS)
 
-    if (loading) return <Text>Loading</Text>
-    if (error) return <Text>{error}</Text>
+    // if (loading) return <Text>Loading</Text>
+    // if (error) return <Text>{error}</Text>
 
     const [formState, setFormState] = useState({
         name: '',
