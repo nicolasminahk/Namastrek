@@ -13,14 +13,27 @@ import Form from './src/components/Form'
 import Login from './src/components/Login'
 import Tips from './src/components/Tips'
 import Register from './src/components/Register'
+import { Text, TouchableOpacity, Image, StyleSheet, Pressable } from 'react-native'
+import img from './assets/namastrek.png'
+import { useNavigation } from '@react-navigation/native'
 
 const Tab = createBottomTabNavigator()
 const HomeStackNavigator = createNativeStackNavigator()
 
 function MyStack() {
+    // const navigate = useNavigation()
     return (
         <HomeStackNavigator.Navigator initialRouteName="Inicio">
-            <HomeStackNavigator.Screen name="Inicio" component={Main} />
+            <HomeStackNavigator.Screen
+                name="Inicio"
+                component={Main}
+                options={{
+                    headerLeft: () => (
+                        <Image style={style.logo} source={img} />
+                        // title: 'Namastrek',
+                    ),
+                }}
+            />
             <HomeStackNavigator.Screen name="salidas" component={Salidas} />
             <HomeStackNavigator.Screen name="nosotros" component={Nosotros} />
             <HomeStackNavigator.Screen name="form" component={Form} />
@@ -83,5 +96,15 @@ export default function Navigation() {
         </NavigationContainer>
     )
 }
+
+const style = StyleSheet.create({
+    logo: {
+        width: 50,
+        height: 50,
+        marginEnd: 5,
+        borderRadius: 5,
+        resizeMode: 'contain',
+    },
+})
 
 //TabBarBadge ----> Para cuando queremos mostrar una notificación sobre el ícono, o algo nuevo

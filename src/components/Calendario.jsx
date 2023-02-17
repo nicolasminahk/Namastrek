@@ -1,6 +1,6 @@
 import { Card, ListItem } from '@rneui/base'
 import React, { useEffect, useState } from 'react'
-import { Alert, TouchableOpacity, View } from 'react-native'
+import { Alert, TouchableOpacity, View, Text } from 'react-native'
 import { Calendar, LocaleConfig } from 'react-native-calendars'
 import salidas from '../../data/salidas'
 import StyledText from './StyleText'
@@ -49,26 +49,8 @@ const Calendario = () => {
     month = `0${month}`
     const fecha = `${month}/${day}/${year}`
 
-    // console.log(fechaCalendar.split('-').toString(), salidas[2].fecha.split('/').reverse().toString())
+    console.log(fechaCalendar.split('-').toString(), salidas[2].fecha.split('/').reverse().toString())
 
-    // return (
-    //     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    //         <Calendar
-    //             style={{ height: '50%', borderRadius: 10, elevation: 4, margin: 40 }}
-    //             onDayPress={(dia) => setFecha(dia.dateString)}
-    //             markingType={'custom'}
-    //             markedDates={{
-    //                 '2022-12-25': {
-    //                     customStyles: {
-    //                         container: { backgroundColor: 'black', elevation: 2 },
-    //                         text: { color: 'white' },
-    //                     },
-    //                 },
-    //             }}
-    //         />
-    //
-    //     </View>
-    // )
     const vacation = { key: 'vacation', color: 'red', dotColor: 'red' }
     const massage = { key: 'massage', color: 'green', markedDotColor: 'green' }
     return (
@@ -83,15 +65,18 @@ const Calendario = () => {
                             text: { color: 'white' },
                         },
                     },
-                    '2023-01-20': {
+                    '2023-01-22': {
                         marked: true,
                         dotColor: 'green',
                         activeOpacity: 0,
                     },
-                    '2023-01-17': {
+                    '2023-02-20': {
                         marked: true,
-                        dotColor: 'green',
+                        dotColor: 'red',
                         activeOpacity: 0,
+                        // onDayPress: () => {
+                        //     Alert.alert('suspendida')
+                        // },
                     },
                     '2023-01-13': { dots: [vacation, massage], marked: true, selectedColor: 'green' },
                 }}

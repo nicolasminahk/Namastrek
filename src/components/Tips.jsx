@@ -22,12 +22,21 @@ const ADD_TIP = gql`
     }
 `
 
+const DELETE_TIP = gql`
+    mutation Mutation($name: String!) {
+        deleteTips(name: $name) {
+            name
+        }
+    }
+`
+
 const Tips = () => {
     const { loading, error, data, refetch } = useQuery(ALL_TIPS, { pollInterval: 500 })
-    // console.log(data)
+    console.log(data)
     // if (loading) return <Text>Loading</Text>
     // if (error) return <Text>{error}</Text>
-
+    const [deleteTips, setDeleteTips] = useState('')
+    console.log(deleteTips)
     const [formState, setFormState] = useState({
         name: '',
         description: '',
@@ -37,6 +46,12 @@ const Tips = () => {
         variables: {
             name: formState.name,
             description: formState.description,
+        },
+    })
+
+    const [deleteTip] = useMutation(DELETE_TIP, {
+        variables: {
+            name: deleteTips,
         },
     })
     return (
@@ -52,6 +67,9 @@ const Tips = () => {
                             </Card.Content>
                             {/* <Card.Cover source={{ uri: 'https://picsum.photos/700' }} /> */}
                             <Card.Actions>{/* <Button>Ok</Button> */}</Card.Actions>
+                            <TouchableOpacity onPress={setDeleteTips(tip.name)}>
+                                <Text>Eliminar</Text>
+                            </TouchableOpacity>
                         </Card>
                     </View>
                 )

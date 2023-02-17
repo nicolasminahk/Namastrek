@@ -3,10 +3,18 @@ import { ScrollView, Image, StyleSheet, View, Linking, Text, TouchableOpacity } 
 import StyledText from './StyleText'
 import img from '../../assets/namastrek.png'
 import { FontAwesome } from '@expo/vector-icons'
+import { AntDesign } from '@expo/vector-icons'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 const Nosotros = () => {
     const handleWhatsApp = async () => {
         await Linking.openURL('https://wa.me/+543814012014?text=Hola!')
+    }
+    const handleInstagram = async () => {
+        await Linking.openURL('https://www.instagram.com/namastrek/')
+    }
+    const handleWeb = async () => {
+        await Linking.openURL('https://namastrek.com.ar/#!/-principal/')
     }
 
     return (
@@ -18,19 +26,16 @@ const Nosotros = () => {
                 <StyledText style={style.textTitle}>NAMASTREK</StyledText>
                 <StyledText style={{ fontWeight: '500' }}>Camina besando la tierra con tus pies </StyledText>
             </View>
-            <View>
+            <View style={{ flexDirection: 'row' }}>
                 <TouchableOpacity onPress={handleWhatsApp} style={style.icon}>
                     <FontAwesome name="whatsapp" size={40} color="green" />
                 </TouchableOpacity>
-                {/* <Text
-                    style={{ marginTop: 30 }}
-                    onPress={() => {
-                        //Linking.openURL('http://api.whatsapp.com/send?text="Hola!"phone=3814012014')
-                        Linking.openURL('whatsapp://send?text=' + 'Hola!' + '&phone=54' + '3814012014')
-                    }}
-                > */}
-                {/* Send WhatsApp Message
-                </Text> */}
+                <TouchableOpacity onPress={handleInstagram} style={style.icon}>
+                    <AntDesign name="instagram" size={40} color="green" />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleWeb} style={style.icon}>
+                    <MaterialCommunityIcons name="web" size={40} color="green" />
+                </TouchableOpacity>
             </View>
         </View>
     )
